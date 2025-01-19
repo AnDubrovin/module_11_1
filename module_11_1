@@ -1,0 +1,28 @@
+import pandas as pd
+pd.DataFrame
+
+students = ('Students_Performance.csv')
+
+print(students[students["test preparation course"] == "completed"]["math score"].head(10))
+print()
+
+
+print(students.tail(3))
+print()
+
+
+with_course = students[students["test preparation course"] == "completed"]
+print(with_course[["math score",
+                   "reading score",
+                   "writing score"]].sort_values(["math score",
+                                                  "reading score",
+                                                  "writing score"], ascending=False).head(7))
+print()
+
+
+with_course = students[students["test preparation course"] == "completed"]
+students["total score"] = students["math score"] + students["reading score"] + students["writing score"]
+print(students.sort_values(["total score"], ascending=False).head())
+
+
+print(students.groupby(["gender", "test preparation course"])["writing score"].count())
